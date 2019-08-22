@@ -1,5 +1,6 @@
 package com;
 
+import com.telran.selenium.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -11,19 +12,11 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class OpenGoogleTest {
-    WebDriver driver;
-
-    @BeforeMethod
-    public void setUp()
-    {
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.get("https://www.google.com");
-    }
+public class OpenGoogleTest extends TestBase{
 
     @Test
     public void searchJavaTest() throws InterruptedException {
+        driver.get("https://www.google.com");
         driver.findElement(By.name("q")).click();
         driver.findElement(By.name("q")).clear();
         driver.findElement(By.name("q")).sendKeys("java" + Keys.ENTER);
@@ -35,10 +28,5 @@ public class OpenGoogleTest {
         new Actions(driver).moveToElement(driver.findElement(By.name("btnI"))).pause(2).click();
         driver.findElement(By.name("btnI")).click();
 
-    }
-    @AfterMethod
-    public void tearDown()
-    {
-        driver.quit();
     }
 }
